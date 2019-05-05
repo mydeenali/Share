@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>%(DocumentTitle)</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./swagger-ui-css">%(CssTheme)
+    <link rel="icon" type="image/png" href="./favicon-32x32-png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./favicon-16x16-png" sizes="16x16" />
+    <style>
+        html {
+            box-sizing: border-box;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+        }
+    </style>
+    %(StylesheetIncludes)
+</head>
+<body>
+<div id="swagger-ui"></div>
+
+<script src="swagger-ui-bundle-js"> </script>
+<script src="swagger-ui-standalone-preset-js"> </script>
+<script>
+    // Get Swagger-Net config into JavaScript
+    function arrayFrom(configString) {
+        return (configString !== "") ? configString.split('|') : [];
+    }
+
+    function stringOrNullFrom(configString) {
+        return (configString !== "null") ? configString : null;
+    }
+
+    function getScript(source) {
+        var script = document.createElement('script');
+        var prior = document.getElementsByTagName('script')[0];
+        script.async = 1;
+
+        script.onload = script.onreadystatechange = function (_, isAbort) {
+            if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+                script.onload = script.onreadystatechange = null;
+                script = undefined;
+            }
+        };
+
+        script.src = source;
+        prior.parentNode.insertBefore(script, prior);
+    }
+
+    window.swaggerNetConfig = {
+        rootUrl: '%(RootUrl)',
+        discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
+        booleanValues: arrayFrom('%(BooleanValues)'),
+        validatorUrl: stringOrNullFrom('%(ValidatorUrl)'),
+        customScripts: arrayFrom('%(CustomScripts)'),
+        docExpansion: '%(DocExpansion)',
+        defaultModelRendering: '%(DefaultModelRendering)',
+        defaultModelExpandDepth: %(DefaultModelExpandDepth),
+        defaultModelsExpandDepth: %(DefaultModelsExpandDepth),
+        maxDisplayedTags: %(UImaxDisplayedTags),
+        filter: %(UIfilter),
+        showExtensions: ('%(ShowExtensions)' == 'true'),
+        showCommonExtensions: ('%(ShowCommonExtensions)' == 'true'),
+        supportedSubmitMethods: arrayFrom('%(SupportedSubmitMethods)'),
+        discoveryUrlSelector: ('%(DiscoveryUrlSelector)' == 'true'),
+        oAuth2Enabled: ('%(OAuth2Enabled)' == 'true'),
+        oAuth2ClientId: '%(OAuth2ClientId)',
+        oAuth2ClientSecret: '%(OAuth2ClientSecret)',
+        oAuth2Realm: '%(OAuth2Realm)',
+        oAuth2AppName: '%(OAuth2AppName)',
+        OAuth2ScopeSeparator: '%(OAuth2ScopeSeparator)',
+        oAuth2AdditionalQueryStringParams: JSON.parse('%(OAuth2AdditionalQueryStringParams)')
+    };
+</script>
+<script>
+    var multiUrls = null;
+    var rootUrl = swaggerNetConfig.rootUrl
+    if (swaggerNetConfig.discoveryPaths.length > 1) {
+        multiUrls = [];
+        swaggerNetConfig.discoveryPaths.forEach(function (path) {
+            multiUrls.push({
+                name: path,
+                url: swaggerNetConfig.rootUrl + "/" + path
+            });
+        });
+    }
+    if (swaggerNetConfig.discoveryPaths[0]) {
+        rootUrl += "/" + swaggerNetConfig.discoveryPaths[0];
+    }
+    window.onload = function () {
+        // Build a system
+        const ui = SwaggerUIBundle({
+            url: rootUrl,
+            urls: multiUrls,
+            deepLinking: true,
+            dom_id: '#swagger-ui',
+            presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ],
+            plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
+            layout: "StandaloneLayout",
+            docExpansion: swaggerNetConfig.docExpansion,
+            defaultModelRendering: swaggerNetConfig.defaultModelRendering,
+            defaultModelExpandDepth: swaggerNetConfig.defaultModelExpandDepth,
+            defaultModelsExpandDepth: swaggerNetConfig.defaultModelsExpandDepth,
+            maxDisplayedTags: swaggerNetConfig.maxDisplayedTags,
+            filter: swaggerNetConfig.filter,
+            showExtensions: swaggerNetConfig.showExtensions,
+            showCommonExtensions: swaggerNetConfig.showCommonExtensions,
+            supportedSubmitMethods: swaggerNetConfig.supportedSubmitMethods,
+            validatorUrl: swaggerNetConfig.validatorUrl,
+            oauth2RedirectUrl: (window.location.origin + window.location.pathname).replace('/index', '/oauth2-redirect-html'),
+            onComplete: function () {
+                swaggerNetConfig.customScripts.forEach(function (script) {
+                    getScript(script);
+                });
+            }
+        })
+        window.ui = ui;
+
+        if (swaggerNetConfig.oAuth2Enabled) {
+            ui.initOAuth({
+                clientId: swaggerNetConfig.oAuth2ClientId,
+                clientSecret: swaggerNetConfig.oAuth2ClientSecret,
+                realm: swaggerNetConfig.oAuth2Realm,
+                appName: swaggerNetConfig.oAuth2AppName,
+                scopeSeparator: swaggerNetConfig.OAuth2ScopeSeparator,
+                additionalQueryStringParams: swaggerNetConfig.oAuth2AdditionalQueryStringParams
+            })
+        }
+    }
+</script>
+</body>
+</html>

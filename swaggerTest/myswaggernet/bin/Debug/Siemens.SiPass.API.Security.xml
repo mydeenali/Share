@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Siemens.SiPass.API.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Siemens.SiPass.API.Security.Controller.V1.CertificateExpiryController">
+            <summary>
+                This class is retrieve certificate expiry information.
+            </summary>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.V1.CertificateExpiryController.Get">
+            <summary>
+                Retrieve certificate expiry information.
+            </summary>
+            <responseCodes>
+                <url>/api/CertificateExpiry</url>
+                <response code="200" errorcode="200">Ok</response>
+                <response code="500" errorcode="401">Internal server error</response>
+            </responseCodes>
+            <remarks>
+                This API should be invoked as /api/CertificateExpiry
+            </remarks>
+        </member>
+        <member name="T:Siemens.SiPass.API.Security.Controller.V1.ProductVersionController">
+            <summary>
+            This controller is responsible to retrieve product version information
+            </summary>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.V1.ProductVersionController.GetVersion">
+            <summary>
+            To retrieve the Access Groups
+            </summary>
+            <url>/api/V1/AccessGroups?startIndex={startIndex}&amp;endIndex={endIndex}&amp;sortingOrder={sortingOrder}&amp;searchString={searchString}</url>
+            <response code="200" errorcode="200">Ok</response>
+            <response code="500" errorcode="401">Internal server error</response>
+            <response code="500" errorcode="506">Too many web clients</response>
+            <response code="401" errorcode="402">Access Denied</response>
+            <response code="400" errorcode="459">AccessGroup Does Not Exist</response>
+            <remarks>
+              This API should be invoked as /api/V1/AccessGroups?startIndex={startIndex}&amp;endIndex={endIndex}&amp;sortingOrder={sortingOrder}&amp;searchString={searchString}
+            </remarks>
+        </member>
+        <member name="T:Siemens.SiPass.API.Security.Controller.AuthenticationController">
+            <summary>
+            This class is responsible for user authentication related use cases, the class will communicate to AuthenticationWrapper for user login, ping etc.
+            </summary>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.AuthenticationController.Get">
+            <summary>
+            Get request to ping the SiPass server for maintaining the session. This method will retrieve Session Token from the 
+            http request header and pass it to AuthenticationWrapper to validate the token in SiPass server.
+            Returns a new runtime object with status property as "true" if session exist else return status as "false"
+            </summary>
+            <responseCodes>
+            <url>/api/Authentication</url>
+            <response code="200" errorcode="200">Ok</response>
+            <response code="500" errorcode="401">Internal server error</response>
+            <response code="500" errorcode="508">login validation failed due to not right time</response>
+            <response code="500" errorcode="509">login validation failed due to expired operator account</response>
+            </responseCodes>
+            <remarks>
+                 This API should be invoked as /api/Authentication
+            </remarks>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.AuthenticationController.Get(System.String)">
+            <summary>
+            To check the Token with SiPass server
+            </summary>
+            <param name="token">Authorization token</param>
+            <responseCodes>
+            <url>/api/Authentication?token={token}</url>
+            <response code="200" errorcode="200">Ok</response>
+            <response code="500" errorcode="401">Internal server error</response>
+            </responseCodes>
+            <remarks>
+                 This API should be invoked as /api/Authentication?token={token}
+            </remarks>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.AuthenticationController.Post(Siemens.SiPass.API.Model.Security.UserInfo)">
+            <summary>
+            To create the Token and insert into Session Management Table
+            </summary>
+            <param name="authInfo">User Details</param>
+            <responseCodes>
+            <url>/api/Authentication</url>
+            <response code="200" errorcode="200">Ok</response>
+            <response code="500" errorcode="401">Internal server error</response>
+            </responseCodes>
+            <remarks>
+                 This API should be invoked as /api/Authentication
+            </remarks>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.AuthenticationController.Delete(System.String)">
+            <summary>
+            To remove the Authentication Token from SiPass and Session Management
+            </summary>
+            <param name="token">Authorization token</param>
+            <responseCodes>
+            <url>/api/Authentication?token={token}</url>
+            <response code="200" errorcode="200">Ok</response>
+            <response code="500" errorcode="401">Internal server error</response>
+            </responseCodes>
+            <remarks>
+                 This API should be invoked as /api/Authentication?token={token}
+            </remarks>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.AuthenticationController.SessionGet">
+            <summary>
+            To check the Token with SiPass server
+            </summary>
+            <responseCodes>
+            <url>/api/Authentication/sessiontimeout</url>
+            <response code="200" errorcode="200">Ok</response>
+            <response code="500" errorcode="401">Internal server error</response>
+            <response code="401" errorcode="5003">Authentication Failure</response>
+            </responseCodes>
+            <remarks>
+                 This API should be invoked as /api/Authentication/sessiontimeout
+            </remarks>
+        </member>
+        <member name="M:Siemens.SiPass.API.Security.Controller.AuthenticationController.GetIpAddress(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            To get IpAdress from owin host
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

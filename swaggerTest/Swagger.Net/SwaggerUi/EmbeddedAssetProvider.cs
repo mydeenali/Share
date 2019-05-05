@@ -69,7 +69,11 @@ namespace Swagger.Net.SwaggerUi
         public static string InferMediaTypeFrom(string path)
         {
             var extension = path.Split('.').Last();
-            
+            if (extension.Contains("-js"))
+                extension = "js";
+            else if (extension.Contains("-css"))
+                extension = "css";
+
 
             switch (extension)
             {

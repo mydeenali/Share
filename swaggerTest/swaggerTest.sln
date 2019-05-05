@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "owinhost", "owinhost\owinho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myswaggernet", "myswaggernet\myswaggernet.csproj", "{F300F072-8D19-471B-8340-0592E0352587}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net", "Swagger.Net\Swagger.Net.csproj", "{D50A26FF-02C6-4C16-BA94-4CD7D43EFBB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net", "..\Swagger-Net-master\Swagger.Net\Swagger.Net.csproj", "{D50A26FF-02C6-4C16-BA94-4CD7D43EFBB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

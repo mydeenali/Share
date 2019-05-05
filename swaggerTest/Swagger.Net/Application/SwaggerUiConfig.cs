@@ -55,9 +55,9 @@ namespace Swagger.Net.Application
             CustomAsset("index", "Swagger.Net.SwaggerUi.CustomAssets.index.html", isTemplate: true);
             CustomAsset("css/typography-css", "Swagger.Net.SwaggerUi.CustomAssets.typography.css");
 
-           // CustomAsset("swagger-ui-bundle-js", "Swagger.Net.SwaggerUi.CustomAssets.swagger-ui-bundle.js");
-            //CustomAsset("swagger-ui-standalone-preset-js", "Swagger.Net.SwaggerUi.CustomAssets.swagger-ui.css");
-            //CustomAsset("swagger-ui-css", "Swagger.Net.SwaggerUi.CustomAssets.swagger-ui-standalone-preset.js");
+            CustomAsset("swagger-ui-bundle-js", "Swagger.Net.SwaggerUi.CustomAssets.swagger-ui-bundle-js");
+            CustomAsset("swagger-ui-standalone-preset-js", "Swagger.Net.SwaggerUi.CustomAssets.swagger-ui-css");
+            CustomAsset("swagger-ui-css", "Swagger.Net.SwaggerUi.CustomAssets.swagger-ui-standalone-preset-js");
         }
 
         public void InjectStylesheet(Assembly resourceAssembly, string resourceName, string media = "screen", bool isTemplate = false)
@@ -214,7 +214,6 @@ namespace Swagger.Net.Application
         {
             foreach (var resourceName in _thisAssembly.GetManifestResourceNames())
             {
-
                 if (resourceName.Contains("Swagger.Net.SwaggerUi.CustomAssets")) continue; // original assets only
 
                 var path = resourceName

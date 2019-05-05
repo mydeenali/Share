@@ -1,15 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>%(DocumentTitle)</title>
-    <title>SHAHUL</title>
+    <title>Swagger.Net Dummy</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./swagger-ui-css">%(CssTheme)
+    <link rel="stylesheet" type="text/css" href="./swagger-ui-css">
     <link rel="icon" type="image/png" href="./favicon-32x32-png" sizes="32x32" />
     <link rel="icon" type="image/png" href="./favicon-16x16-png" sizes="16x16" />
     <style>
-
         html {
             box-sizing: border-box;
             overflow: -moz-scrollbars-vertical;
@@ -27,7 +25,7 @@
             background: #fafafa;
         }
     </style>
-    %(StylesheetIncludes)
+    
 </head>
 <body>
 <div id="swagger-ui"></div>
@@ -61,28 +59,28 @@
     }
 
     window.swaggerNetConfig = {
-        rootUrl: '%(RootUrl)',
-        discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
-        booleanValues: arrayFrom('%(BooleanValues)'),
-        validatorUrl: stringOrNullFrom('%(ValidatorUrl)'),
-        customScripts: arrayFrom('%(CustomScripts)'),
-        docExpansion: '%(DocExpansion)',
-        defaultModelRendering: '%(DefaultModelRendering)',
-        defaultModelExpandDepth: %(DefaultModelExpandDepth),
-        defaultModelsExpandDepth: %(DefaultModelsExpandDepth),
-        maxDisplayedTags: %(UImaxDisplayedTags),
-        filter: %(UIfilter),
-        showExtensions: ('%(ShowExtensions)' == 'true'),
-        showCommonExtensions: ('%(ShowCommonExtensions)' == 'true'),
-        supportedSubmitMethods: arrayFrom('%(SupportedSubmitMethods)'),
-        discoveryUrlSelector: ('%(DiscoveryUrlSelector)' == 'true'),
-        oAuth2Enabled: ('%(OAuth2Enabled)' == 'true'),
-        oAuth2ClientId: '%(OAuth2ClientId)',
-        oAuth2ClientSecret: '%(OAuth2ClientSecret)',
-        oAuth2Realm: '%(OAuth2Realm)',
-        oAuth2AppName: '%(OAuth2AppName)',
-        OAuth2ScopeSeparator: '%(OAuth2ScopeSeparator)',
-        oAuth2AdditionalQueryStringParams: JSON.parse('%(OAuth2AdditionalQueryStringParams)')
+        rootUrl: 'http://localhost:9000',
+        discoveryPaths: arrayFrom('swagger/docs/V1'),
+        booleanValues: arrayFrom('0|1'),
+        validatorUrl: stringOrNullFrom('https://online.swagger.io/validator'),
+        customScripts: arrayFrom(''),
+        docExpansion: 'list',
+        defaultModelRendering: 'example',
+        defaultModelExpandDepth: 0,
+        defaultModelsExpandDepth: 0,
+        maxDisplayedTags: 100,
+        filter: '',
+        showExtensions: ('true' == 'true'),
+        showCommonExtensions: ('false' == 'true'),
+        supportedSubmitMethods: arrayFrom('get|put|post|delete|options|head|patch'),
+        discoveryUrlSelector: ('true' == 'true'),
+        oAuth2Enabled: ('false' == 'true'),
+        oAuth2ClientId: '',
+        oAuth2ClientSecret: '',
+        oAuth2Realm: '',
+        oAuth2AppName: '',
+        OAuth2ScopeSeparator: ' ',
+        oAuth2AdditionalQueryStringParams: JSON.parse('{}')
     };
 </script>
 <script>
